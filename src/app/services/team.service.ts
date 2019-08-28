@@ -10,13 +10,13 @@ export const TeamsTableHeaders = ['Name', 'Country', 'Players'];
   providedIn: 'root'
 })
 export class TeamService {
-  private teamsDB: AngularFireList<Team>;
+  private teamsDb: AngularFireList<Team>;
   constructor(private db: AngularFireDatabase) {
-    this.teamsDB = this.db.list('/teams', ref => ref.orderByChild('name'));
+    this.teamsDb = this.db.list('/teams', ref => ref.orderByChild('name'));
   }
 
   getTeams(): Observable<Team[]> {
-    return this.teamsDB.snapshotChanges().pipe(
+    return this.teamsDb.snapshotChanges().pipe(
       map(changes => {
         return changes.map(c => ({ $key: c.payload.key, ...c.payload.val() }));
       })
@@ -24,7 +24,7 @@ export class TeamService {
   }
 
   addTeam(team: Team) {
-    return this.teamsDB.push(team);
+    return this.teamsDb.push(team);
   }
 
   deleteTeam(id: string) {
@@ -33,7 +33,7 @@ export class TeamService {
 
   editTeam(newTeamData) {
     const $key = newTeamData.$key;
-    delete newTeamData.$key;
+    delete (newTeamData.$key);
     this.db.list('/teams').update($key, newTeamData);
   }
 }

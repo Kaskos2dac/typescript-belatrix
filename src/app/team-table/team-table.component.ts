@@ -12,12 +12,12 @@ import { Countries } from '../interfaces/player';
 })
 export class TeamTableComponent implements OnInit {
   // el $ nos indica que es una variable asincronica
-  public team$: Observable<Team[]>;
+  public teams$: Observable<Team[]>;
   public tableHeaders =  TeamsTableHeaders;
   constructor(private teamService: TeamService) {}
 
-  ngOnInit() {
-    this.team$ = this.teamService.getTeams();
+  ngOnInit() { /*este es el lugar correcto para hacer peticiones*/
+    this.teams$ = this.teamService.getTeams();
     this.teamService
       .getTeams()
       .pipe(take(1))

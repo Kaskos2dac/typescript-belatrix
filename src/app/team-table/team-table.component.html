@@ -12,11 +12,11 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <tr *ngFor="let team of (team$ | async)">
+        <tr *ngFor="let team of (teams$ | async)">
           <th>{{ team.name }}</th>
           <th>{{ team.country }}</th>
           <th>
-            <p *ngFor="let players of team.players">{{ player.name }}</p>
+            <p *ngFor="let player of team.players">{{ player.name }}</p>
           </th>
         </tr>
       </tbody>
